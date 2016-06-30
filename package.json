@@ -1,0 +1,30 @@
+{
+  "name": "firstapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "compiled.min.js",
+  "dependencies": {
+    "axios": "^0.12.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "browserify": "^13.0.1",
+    "firebase": "^3.1.0",
+    "history": "^3.0.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-router": "^2.5.1",
+    "reactfire": "^0.5.1",
+    "reactify": "^1.1.1",
+    "uglify-js": "^2.6.4",
+    "watchify": "^3.7.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-preset-react": "^6.5.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Iván Wolf",
+  "license": "ISC"
+}
