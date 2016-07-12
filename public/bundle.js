@@ -26406,11 +26406,19 @@
 	        repos: data.repos
 	      });
 	    }.bind(this));
+	    helpers.getNotes(username).then(function (data) {
+	      this.setState({
+	        notes: data.notes
+	      });
+	    }.bind(this));
 	  },
-
 	  handleAddNote: function handleAddNote(newNote) {
-	    //Actualizar la DB
-	    console.log(newNote);
+	    var username = this.props.params.username;
+	    helpers.addNote(username, newNote).then(function (data) {
+	      this.setState({
+	        notes: data.notes
+	      });
+	    }.bind(this));
 	  },
 	  render: function render() {
 	    return React.createElement(
@@ -26671,10 +26679,29 @@
 
 	var helpers = {
 	  getGithubInfo: function getGithubInfo(username) {
-	    return axios.all([getRepos(username), getUserInfo(username)]).then(function (arr) {
+	    return axios.all([getRepos(username), getUserInfo(username)]).then(function (response) {
 	      return {
-	        repos: arr[0].data,
-	        bio: arr[1].data
+	        repos: response[0].data,
+	        bio: response[1].data
+	      };
+	    });
+	  },
+	  getNotes: function getNotes(username) {
+	    return axios.get('http://127.0.0.1:5000/profile/' + username).then(function (response) {
+	      return {
+	        notes: response.data
+	      };
+	    });
+	  },
+	  addNote: function addNote(username, text) {
+	    return axios.get('http://127.0.0.1:5000/add_note', {
+	      params: {
+	        username: username,
+	        text: text
+	      }
+	    }).then(function (response) {
+	      return {
+	        notes: response.data
 	      };
 	    });
 	  }

@@ -27,13 +27,22 @@ var Profile = React.createClass({
           bio: data.bio,
           repos: data.repos
         })
-      }.bind(this))
+      }.bind(this));
+    helpers.getNotes(username)
+      .then(function(data){
+        this.setState({
+          notes: data.notes
+        })
+      }.bind(this));
   },
-
-
   handleAddNote: function(newNote){
-    //Actualizar la DB
-    console.log(newNote);
+    var username = this.props.params.username;
+    helpers.addNote(username, newNote)
+      .then(function(data){
+        this.setState({
+          notes: data.notes
+        })
+      }.bind(this));
   },
   render: function(){
     return(
