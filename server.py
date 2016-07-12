@@ -21,6 +21,8 @@ def get_db():
         flask.g.psql_db = connect_db()
     return flask.g.psql_db
 
+### Routes
+
 @app.route('/')
 def index():
     return flask.send_file('./public/index.html')
@@ -50,7 +52,6 @@ def add_note():
                  ORDER BY id DESC", (username,))
 
     notes_list = [row[0] for row in cur.fetchall()]
-    # return flask.make_response()
     return flask.jsonify(notes_list)
 
 if __name__ == '__main__':
