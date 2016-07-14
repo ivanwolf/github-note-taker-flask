@@ -26687,14 +26687,14 @@
 	    });
 	  },
 	  getNotes: function getNotes(username) {
-	    return axios.get('http://127.0.0.1:5000/profile/' + username).then(function (response) {
+	    return axios.get('http://localhost:5000/profile/' + username).then(function (response) {
 	      return {
 	        notes: response.data
 	      };
 	    });
 	  },
 	  addNote: function addNote(username, text) {
-	    return axios.get('http://127.0.0.1:5000/add_note', {
+	    return axios.get('http://localhost:5000/add_note', {
 	      params: {
 	        username: username,
 	        text: text
