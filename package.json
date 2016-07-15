@@ -11,6 +11,7 @@
     "firebase": "^3.1.0",
     "history": "^3.0.0",
     "react": "^15.1.0",
+    "react-autosuggest": "^3.8.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.5.1",
     "reactfire": "^0.5.1",

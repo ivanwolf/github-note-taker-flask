@@ -1,26 +1,25 @@
-var React = require('react');
-var Router = require('react-router');
-var Repos = require('./Github/Repos');
-var UserProfile = require('./Github/UserProfile');
-var Notes = require('./Notes/Notes');
-var helpers = require('../utils/helpers');
+import React from 'react';
+import Repos from './Github/Repos';
+import UserProfile from './Github/UserProfile';
+import Notes from './Notes/Notes';
+import helpers from '../utils/helpers';
 
-var Profile = React.createClass({
-
-  getInitialState: function(){
-    return {
-      notes: ["Falta actualizar las notas"],
+class Profile extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      notes: [],
       bio: {},
       repos: []
-    }
-  },
-  componentDidMount: function(){
+    };
+  }
+  componentDidMount(){
     this.init(this.props.params.username);
-  },
-  componentWillReceiveProps: function(nextProps){
-    this.init(nextProps.params.username)
-  },
-  init: function(username){
+  }
+  componentWillReceiveProps(nextProps){
+    this.init(nextProps.params.username);
+  }
+  init(username){
     helpers.getGithubInfo(username)
       .then(function(data){
         this.setState({
@@ -34,17 +33,17 @@ var Profile = React.createClass({
           notes: data.notes
         })
       }.bind(this));
-  },
-  handleAddNote: function(newNote){
-    var username = this.props.params.username;
+  }
+  handleAddNote(newNote){
+    const username = this.props.params.username;
     helpers.addNote(username, newNote)
       .then(function(data){
         this.setState({
           notes: data.notes
         })
       }.bind(this));
-  },
-  render: function(){
+  }
+  render(){
     return(
       <div className="row">
         <div className="col-md-4">
@@ -57,12 +56,12 @@ var Profile = React.createClass({
           <Notes
             username={this.props.params.username}
             notes={this.state.notes}
-            addNote={this.handleAddNote}
+            addNote={(newNote) => this.handleAddNote(newNote)}
           />
         </div>
       </div>
     )
   }
-});
+}
 
-module.exports = Profile;
+export default Profile;
